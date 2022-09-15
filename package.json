@@ -1,0 +1,17 @@
+{
+  "name": "protobuf",
+  "version": "1.0.0",
+  "description": "Beatstar protobuf parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "external_address4401",
+  "license": "ISC",
+  "keywords": [
+    "beatstar"
+  ],
+  "publishConfig": {
+    "@ExternalAddress:registry": "https://npm.pkg.github.com"
+  }
+}
