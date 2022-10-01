@@ -24,7 +24,17 @@ module.exports = {
 			2: new Varint('swipe', 2)
 		}),
 		6: new Varint('lane', 6),
-		13: new Varint('size', 13)
+		13: new Varint('size', 13),
+		14: new Group('note', 14, {
+			1: new Group('a', 1, {
+				1: new Float('offset', 1),
+				2: new Group('vec', 2, {
+					1: new Float('x', 1),
+					2: new Float('y', 2)
+				}),
+				3: new Varint('lane', 3)
+			}, { repeating: true })
+		})
 	}),
 	6: new PackedMessage('sections', 6, {
 		1: new Float('offset', 1)

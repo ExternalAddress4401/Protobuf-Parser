@@ -11,7 +11,8 @@ class ProtobufWriter {
         subProto.write(this, this.data[key], subProto);
       } else {
         if (Array.isArray(this.data[key])) {
-          const write = Buffer.concat(this.data[key].map((el) => el.data));
+			console.log(this.data[key])
+          const write = Buffer.concat(this.data[key].map((el) => Buffer.from(el.data)));
           this.concat(write);
         } else {
           this.concat(Buffer.from(this.data[key].data));

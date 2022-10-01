@@ -19,11 +19,31 @@ const { getSeasonSongs } = require('./utilities/GameConfig');
 const { addUrlsToSongs } = require('./utilities/General');
 const { getRewards } = require('./utilities/LiveOpsEventConfig');
 
-const gameConfig = fs.readFileSync("./GameConfig.bytes");
+function read(fileName) {
+	const t = fs.readFileSync(fileName);
 
-const gameConfigReader = new ProtobufReader(gameConfig);
-gameConfigReader.process();
+	const read = new ProtobufReader(t);
+	read.process();
 
-const parsed = gameConfigReader.parseProto(GameConfigProto);
+	const p = read.parseProto(AssetsPatchProto);
+	
+	//console.log(getSeasonSongs(p));
+		
+	fs.writeFileSync('parsed.txt', JSON.stringify(p, null, 2));
+}
 
-fs.writeFileSync('parsed.json', JSON.stringify(parsed, null, 2));
+function build(fileName) {
+	const t = JSON.parse(fs.readFileSync(fileName).toString());
+	
+	const writer = new ProtobufWriter(t);
+	
+	console.log(writer);
+
+	writer.build(GameConfigProto);
+	
+	fs.writeFileSync('built.bytes', writer.buffer);
+}
+
+read('./tests/AssetsPatchConfig.bytes');
+
+//build('./a.txt');

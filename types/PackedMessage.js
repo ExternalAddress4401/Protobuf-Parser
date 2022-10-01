@@ -40,7 +40,7 @@ class PackedMessage extends BaseType {
             const subWriter = new ProtobufWriter();
             for(const key in val) {
                 const subProto = writer.getKeys(key, proto.fields);
-                proto.fields[subProto.field].write(subWriter, val[subProto.name], proto.fields[subProto.field]);
+				proto.fields[subProto.field].write(subWriter, val[subProto.name], proto.fields[subProto.field]);
             }
             //write size of this message to packed
             packedBuffer.writeVarint(subWriter.buffer.length);

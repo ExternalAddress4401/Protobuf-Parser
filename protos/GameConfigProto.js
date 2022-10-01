@@ -6,6 +6,9 @@ const Float = require('../types/Float');
 const Repeating = require('../types/Repeating');
 const Boolean = require('../types/Boolean');
 const RequireCampaignBoxProgress = require('./pieces/RequireCampaignBoxProgress');
+const SharedRequirement = require('./pieces/SharedRequirement');
+const RequireSongsLeftToUnlock = require('./pieces/RequireSongsLeftToUnlock');
+const RequireShowdown = require('./pieces/RequireShowdown');
 
 module.exports = {
 	3: new Repeating('songs', 3, {
@@ -71,13 +74,55 @@ module.exports = {
 		74: new Float('unknown2', 74),
 		76: new String('songTitleLocId', 76),
 		77: new String('songArtistLocId', 77),
-		78: new Varint('unknown4', 78),
+		78: new Boolean('Rejected', 78),
 		79: new Varint('musicKitDataId', 79),
 		80: new Varint('Groups_id', 80, { repeating: true, packed: true }),
-		83: new String('unknown4', 83),
+		83: new String('removalReason', 83),
 		84: new Varint('unknown3', 84)
 	}),
-	119: new PackedMessage('boxes', 119, {
+	/*88: new PackedMessage('difficulties', 88, {
+		1: new Varint('id', 1),
+		3: new Varint('difficulty', 3),
+		5: new String('textColour', 5),
+		6: new Boolean('displayTag', 6),
+		7: new Group('backgroundGradient', 7, {
+			2: new PackedMessage('AlphaKeys', 2, {
+				1: new Float('Alpha', 1),
+				2: new Float('Time', 2)
+			}),
+			3: new PackedMessage('ColorKeys', 3, {
+				1: new String('Color', 1),
+				2: new Float('Time', 2)
+			})
+		}),
+		8: new String('iconSprite_id', 8),
+		9: new String('iconColour', 9),
+		15: new String('idLabel', 15),
+		17: new String('boxVisualBakedImage_id', 17),
+		18: new Group('boxVisualBackgroundGradient', 18, {
+			2: new PackedMessage('AlphaKeys', 2, {
+				1: new Float('Alpha', 1),
+				2: new Float('Time', 2)
+			}),
+			3: new PackedMessage('ColorKeys', 3, {
+				1: new String('Color', 1),
+				2: new Float('Time', 2)
+			})
+		}),
+		19: new Group('botScoreCurve', 19, {
+			1: new Varint('preWrapMode', 1),
+			2: new Varint('postWrapMode', 2),
+			3: new Group('keyFrames', 3, {
+				1: new Float('value', 1),
+				2: new Float('inTangent', 2),
+				3: new Float('outTangent', 3),
+				5: new Float('time', 5)
+			}, { repeating: true })
+		}),
+		21: new String('nameLoc_id', 21),
+		23: new String('campaignUnlockRequirement', 23)
+	}),*/
+	/*119: new PackedMessage('boxes', 119, {
 		1: new Varint('id', 1),
 		2: new String('idLabel', 2),
 		18: new Group('BeatmapPicker', 18, {
@@ -106,6 +151,14 @@ module.exports = {
 			1: new Group('Requirements', 1, {
 				2: new PackedMessage('info', 2, {
 					1: new Varint('type', 1),
+					2: { name: 'piece' }
+				}, {
+					enums: {
+						4: SharedRequirement,
+						25: RequireCampaignBoxProgress,
+						29: RequireSongsLeftToUnlock,
+						30: RequireShowdown
+					}
 				})
 			}),
 		}),
@@ -118,8 +171,12 @@ module.exports = {
 			}),
 			4: new Varint('fixedOptions_id', 4, { repeating: true })
 		}),
+		34: new PackedMessage('openingSkipCostsOverride', 34, {
+			1: new Varint('from', 1),
+			2: new Float('multiplier', 2)
+		}),
 		37: new String('nameLoc_id', 37),
 		38: new String('descLoc_id', 38),
 		41: new Varint('boxOpeningVisualRef_id', 41)
-	})
+	})*/
 }
